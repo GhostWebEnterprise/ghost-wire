@@ -1,0 +1,163 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --color-bg: #08080a;
+  --color-surface: #101014;
+  --color-elevated: #17171c;
+  --color-panel: #1c1c22;
+  --color-fg: #ececef;
+  --color-muted: #8b8b96;
+  --color-subtle: #6a6a74;
+  --color-border: #23232c;
+  --color-border-strong: #2e2e38;
+  --color-accent: #c5ccd6;
+  --color-accent-fg: #08080a;
+  --color-ice: #9eb3c7;
+  --color-verified: #7d9a86;
+  --color-warn: #c4a574;
+  --color-danger: #c47a72;
+  --color-self: #1a1e26;
+  --color-avatar-1: #2c313c;
+  --color-avatar-2: #3a322c;
+  --color-avatar-3: #2c3834;
+  --color-avatar-4: #323040;
+  --color-avatar-5: #3a3034;
+  --color-avatar-6: #2e343c;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-border: 0 0 0 1px rgb(255 255 255 / 0.08);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-image: linear-gradient(180deg, #08080a 0%, #0c0c10 100%);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-ice) 35%, transparent);
+    color: var(--color-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ice);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  input,
+  textarea,
+  button {
+    font-family: inherit;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.vault-shield {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.vault-shield img,
+.vault-shield video {
+  pointer-events: none;
+}
+
+.vault-blur {
+  filter: blur(var(--motion-blur-md, 8px));
+}
+
+@keyframes gw-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes gw-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-ice) 45%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 12px transparent;
+  }
+}
+
+.stagger-in > * {
+  opacity: 0;
+  animation: gw-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.stagger-in > *:nth-child(1) {
+  animation-delay: 40ms;
+}
+.stagger-in > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+.stagger-in > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+.stagger-in > *:nth-child(4) {
+  animation-delay: 160ms;
+}
+.stagger-in > *:nth-child(5) {
+  animation-delay: 200ms;
+}
+.stagger-in > *:nth-child(6) {
+  animation-delay: 240ms;
+}
+
+.knock-flash {
+  animation: gw-pulse-ring 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
